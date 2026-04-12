@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Your Seat | Jack & Joe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #0F2750;
+      --white: #FFFFFF;
+      --navy-light: rgba(15, 39, 80, 0.08);
+      --navy-mid: rgba(15, 39, 80, 0.15);
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      background-color: var(--white);
+      color: var(--navy);
+      font-family: 'Libre Baskerville', 'Georgia', serif;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+
+    .frame {
+      width: 100%;
+      max-width: 540px;
+      padding: 2.5rem 1.75rem;
+      position: relative;
+      box-shadow:
+        0 0 0 1px var(--navy),
+        0 0 0 5px var(--white),
+        0 0 0 6px var(--navy);
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .monogram {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 2.75rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      margin-bottom: 2rem;
+      line-height: 1;
+    }
+
+    .monogram .amp {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 0.85em;
+      margin: 0 0.05em;
+    }
+
+    .title {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+      line-height: 1.3;
+    }
+
+    .divider {
+      width: 2.5rem;
+      height: 1px;
+      background-color: var(--navy);
+      margin: 0 auto 1.75rem;
+    }
+
+    .event-details {
+      font-family: 'Libre Baskerville', 'Georgia', serif;
+      font-style: italic;
+      font-size: 0.8rem;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+
+    /* Search */
+    .search-section {
+      margin-bottom: 1rem;
+    }
+
+    .search-label {
+      display: block;
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      font-family: 'Libre Baskerville', 'Georgia', serif;
+      font-size: 1rem;
+      color: var(--navy);
+      background: transparent;
+      border: 1px solid var(--navy);
+      outline: none;
+      text-align: center;
+      letter-spacing: 0.04em;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .search-input::placeholder {
+      color: rgba(15, 39, 80, 0.35);
+      font-style: italic;
+    }
+
+    .search-input:focus {
+      box-shadow: 0 0 0 1px var(--navy);
+    }
+
+    /* Results */
+    .results {
+      min-height: 1rem;
+    }
+
+    .results[aria-live] {
+      /* ensure screen readers pick up changes */
+    }
+
+    .result-item {
+      text-align: center;
+      padding: 1.25rem 1rem;
+      border-bottom: 1px solid var(--navy-mid);
+      animation: fadeIn 0.3s ease;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .result-item:hover {
+      background-color: var(--navy-light);
+    }
+
+    .result-item.active {
+      background-color: var(--navy);
+      color: var(--white);
+    }
+
+    .result-item.active .result-table {
+      opacity: 0.85;
+    }
+
+    .result-item:last-child {
+      border-bottom: none;
+    }
+
+    .result-name {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+
+    .result-table {
+      font-family: 'Libre Baskerville', 'Georgia', serif;
+      font-style: italic;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      opacity: 0.75;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-style: italic;
+      font-size: 0.85rem;
+      opacity: 0.5;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Table Map */
+    .table-map {
+      display: none;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--navy-mid);
+    }
+
+    .table-map.visible {
+      display: block;
+    }
+
+    .table-map-title {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .table-map-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .table-circle {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1.5px solid var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.35s ease, color 0.35s ease, transform 0.2s ease;
+      position: relative;
+    }
+
+    .table-circle:hover {
+      background-color: var(--navy-light);
+    }
+
+    .table-circle.highlighted {
+      background-color: var(--navy);
+      color: var(--white);
+      transform: scale(1.05);
+    }
+
+    .table-circle-number {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      line-height: 1;
+    }
+
+    .table-circle-label {
+      font-family: 'Libre Baskerville', 'Georgia', serif;
+      font-size: 0.4rem;
+      letter-spacing: 0.08em;
+      margin-top: 2px;
+      opacity: 0.7;
+    }
+
+    .table-circle.highlighted .table-circle-label {
+      opacity: 0.85;
+    }
+
+    /* Table detail (shown below map when a table is selected) */
+    .table-detail {
+      margin-top: 1.5rem;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .table-detail-title {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .table-detail-guests {
+      list-style: none;
+      font-size: 0.78rem;
+      line-height: 1.9;
+      letter-spacing: 0.03em;
+    }
+
+    .table-detail-guest.is-searched {
+      font-weight: 700;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+    }
+
+    .footer-text {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      opacity: 0.4;
+    }
+
+    /* Desktop */
+    @media (min-width: 768px) {
+      body {
+        padding: 2rem;
+      }
+
+      .frame {
+        padding: 3.5rem 3rem;
+      }
+
+      .monogram {
+        font-size: 3.25rem;
+      }
+
+      .title {
+        font-size: 1.65rem;
+        letter-spacing: 0.4em;
+      }
+
+      .event-details {
+        font-size: 0.85rem;
+      }
+
+      .search-input {
+        font-size: 1.05rem;
+        padding: 1rem 1.25rem;
+      }
+
+      .result-name {
+        font-size: 1.3rem;
+      }
+
+      .table-map-grid {
+        gap: 1rem;
+        max-width: 360px;
+      }
+
+      .table-circle-number {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="frame">
+    <header class="header">
+      <div class="monogram">J <span class="amp">&amp;</span> J</div>
+      <h1 class="title">Find Your Seat</h1>
+      <div class="divider"></div>
+      <p class="event-details">
+        Saturday, the thirteenth of June<br>
+        two thousand twenty-six<br>
+        Stamford Yacht Club
+      </p>
+    </header>
+
+    <main>
+      <div class="search-section">
+        <label for="guest-search" class="search-label">Enter your name</label>
+        <input
+          type="text"
+          id="guest-search"
+          class="search-input"
+          placeholder="Search your name..."
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+        >
+      </div>
+
+      <div class="results" id="results" aria-live="polite"></div>
+
+      <section class="table-map" id="table-map">
+        <h2 class="table-map-title">Seating Layout</h2>
+        <div class="table-map-grid" id="table-map-grid"></div>
+        <div id="table-detail"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer-text">J &amp; J &nbsp;&middot;&nbsp; June 2026</p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      let guestIndex = [];
+      let tables = [];
+      let config = {};
+      let debounceTimer = null;
+
+      // --- Data Loading ---
+      fetch('guests.json')
+        .then(r => r.json())
+        .then(data => {
+          config = data.config || {};
+          tables = data.tables || [];
+          buildIndex(tables);
+          if (config.showTableMap) {
+            renderTableMap(tables);
+            document.getElementById('table-map').classList.add('visible');
+          }
+        })
+        .catch(() => {
+          document.getElementById('results').innerHTML =
+            '<p class="no-results">Unable to load guest list.</p>';
+        });
+
+      function buildIndex(tables) {
+        guestIndex = [];
+        tables.forEach(table => {
+          table.guests.forEach(name => {
+            guestIndex.push({
+              name: name,
+              nameLower: name.toLowerCase().trim(),
+              tableNumber: table.number,
+              tableLabel: table.label
+            });
+          });
+        });
+      }
+
+      // --- Search ---
+      const searchInput = document.getElementById('guest-search');
+      searchInput.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(handleSearch, 200);
+      });
+
+      function handleSearch() {
+        const query = searchInput.value.trim();
+        if (query.length < 2) {
+          clearResults();
+          clearHighlights();
+          clearTableDetail();
+          return;
+        }
+        const results = fuzzySearch(query, guestIndex);
+        renderResults(results);
+
+        if (config.showTableMap) {
+          clearHighlights();
+          clearTableDetail();
+          if (results.length === 1) {
+            highlightTable(results[0].tableNumber);
+            showTableDetail(results[0].tableNumber, [results[0].name]);
+          }
+        }
+      }
+
+      function fuzzySearch(query, index) {
+        const q = query.toLowerCase().trim();
+        const scored = [];
+
+        index.forEach(entry => {
+          let score = 0;
+          const name = entry.nameLower;
+
+          // Exact match
+          if (name === q) {
+            score = 1000;
+          }
+          // Starts with query
+          else if (name.startsWith(q)) {
+            score = 500;
+          }
+          // Contains query as substring
+          else if (name.includes(q)) {
+            score = 300 - name.indexOf(q);
+          }
+          // Word-start match
+          else {
+            const words = name.split(/\s+/);
+            for (const word of words) {
+              if (word.startsWith(q)) {
+                score = Math.max(score, 400);
+              }
+            }
+          }
+
+          // Levenshtein fallback for longer queries
+          if (score === 0 && q.length >= 4) {
+            const words = name.split(/\s+/);
+            for (const word of words) {
+              const dist = levenshtein(q, word);
+              if (dist <= 2) {
+                score = Math.max(score, 100 - dist * 30);
+              }
+            }
+            // Also check against full name
+            const fullDist = levenshtein(q, name);
+            if (fullDist <= 3) {
+              score = Math.max(score, 80 - fullDist * 20);
+            }
+          }
+
+          if (score > 0) {
+            scored.push({ ...entry, score });
+          }
+        });
+
+        scored.sort((a, b) => b.score - a.score);
+        return scored.slice(0, 5);
+      }
+
+      function levenshtein(a, b) {
+        const m = a.length, n = b.length;
+        const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+        for (let i = 0; i <= m; i++) dp[i][0] = i;
+        for (let j = 0; j <= n; j++) dp[0][j] = j;
+        for (let i = 1; i <= m; i++) {
+          for (let j = 1; j <= n; j++) {
+            dp[i][j] = a[i - 1] === b[j - 1]
+              ? dp[i - 1][j - 1]
+              : 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+          }
+        }
+        return dp[m][n];
+      }
+
+      // --- Rendering ---
+      function renderResults(results) {
+        const container = document.getElementById('results');
+        if (results.length === 0) {
+          container.innerHTML = '<p class="no-results">No guests found</p>';
+          return;
+        }
+        container.innerHTML = results.map(r =>
+          `<div class="result-item" data-table="${r.tableNumber}" data-name="${escapeHtml(r.name)}">
+            <div class="result-name">${escapeHtml(r.name)}</div>
+            <div class="result-table">${escapeHtml(r.tableLabel)}</div>
+          </div>`
+        ).join('');
+
+        if (config.showTableMap && results.length > 1) {
+          container.querySelectorAll('.result-item').forEach(item => {
+            item.addEventListener('click', () => {
+              container.querySelectorAll('.result-item.active').forEach(el => el.classList.remove('active'));
+              item.classList.add('active');
+              clearHighlights();
+              const tableNum = parseInt(item.dataset.table, 10);
+              highlightTable(tableNum);
+              showTableDetail(tableNum, [item.dataset.name]);
+              document.getElementById('table-map').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+          });
+        }
+      }
+
+      function clearResults() {
+        document.getElementById('results').innerHTML = '';
+      }
+
+      // --- Table Map ---
+      function renderTableMap(tables) {
+        const grid = document.getElementById('table-map-grid');
+        grid.innerHTML = tables.map(t =>
+          `<div class="table-circle" data-table="${t.number}" title="${escapeHtml(t.label)}">
+            <span class="table-circle-number">${t.number}</span>
+          </div>`
+        ).join('');
+
+        // Click to show table detail
+        grid.addEventListener('click', (e) => {
+          const circle = e.target.closest('.table-circle');
+          if (!circle) return;
+          const tableNum = parseInt(circle.dataset.table, 10);
+          clearHighlights();
+          highlightTable(tableNum);
+          showTableDetail(tableNum, []);
+        });
+      }
+
+      function highlightTable(tableNumber) {
+        const circle = document.querySelector(`.table-circle[data-table="${tableNumber}"]`);
+        if (circle) circle.classList.add('highlighted');
+      }
+
+      function clearHighlights() {
+        document.querySelectorAll('.table-circle.highlighted').forEach(el => {
+          el.classList.remove('highlighted');
+        });
+      }
+
+      function showTableDetail(tableNumber, searchedNames) {
+        const table = tables.find(t => t.number === tableNumber);
+        if (!table) return;
+        const searchedSet = new Set(searchedNames.map(n => n.toLowerCase()));
+        const detail = document.getElementById('table-detail');
+        detail.innerHTML =
+          `<div class="table-detail">
+            <h3 class="table-detail-title">${escapeHtml(table.label)}</h3>
+            <ul class="table-detail-guests">
+              ${table.guests.map(g =>
+                `<li class="table-detail-guest${searchedSet.has(g.toLowerCase()) ? ' is-searched' : ''}">${escapeHtml(g)}</li>`
+              ).join('')}
+            </ul>
+          </div>`;
+      }
+
+      function clearTableDetail() {
+        document.getElementById('table-detail').innerHTML = '';
+      }
+
+      // --- Utilities ---
+      function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+    })();
+  </script>
+
+</body>
+</html>
