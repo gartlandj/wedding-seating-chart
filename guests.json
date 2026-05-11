@@ -4,59 +4,196 @@
   },
   "tables": [
     {
-      "number": 1,
+      "number": "HT",
+      "label": "Head Table",
+      "guests": [
+        "James Despotoulis",
+        "John Gartland",
+        "Joseph (Joe) Mania",
+        "Max Morand",
+        "Nicholas Tull",
+        "Matthew Young"
+      ]
+    },
+    {
+      "number": "1",
       "label": "Table 1",
-      "guests": ["Name 1", "Name 2", "Name 3", "Name 4", "Name 5", "Name 6", "Name 7", "Name 8", "Name 9", "Name 10"]
+      "guests": [
+        "Kyra Bryan",
+        "Conor Cosgrove",
+        "Edward Gartland",
+        "James Hanson",
+        "Erica Im",
+        "Jason Naill",
+        "Rory Shinnick",
+        "Lauren Telesz"
+      ]
     },
     {
-      "number": 2,
+      "number": "2",
       "label": "Table 2",
-      "guests": ["Name 11", "Name 12", "Name 13", "Name 14", "Name 15", "Name 16", "Name 17", "Name 18", "Name 19", "Name 20"]
+      "guests": [
+        "Katherine Pierson",
+        "Elizabeth Todero",
+        "Jenna Todero",
+        "Kathryn Todero",
+        "Louis Todero",
+        "Danny Vento",
+        "Jenna Vento",
+        "Regina Vento",
+        "Stephen Zarzecki",
+        "Theresa Zarzecki"
+      ]
     },
     {
-      "number": 3,
+      "number": "3",
       "label": "Table 3",
-      "guests": ["Name 21", "Name 22", "Name 23", "Name 24", "Name 25", "Name 26", "Name 27", "Name 28", "Name 29", "Name 30"]
+      "guests": [
+        "Regina Cheever",
+        "Frank Connor",
+        "Valerie Connor",
+        "Megwin Finegan",
+        "Michele Gartland",
+        "Ivan Gazidis",
+        "Christopher Hoopes",
+        "Christopher Maloney",
+        "Lynn Maloney",
+        "Maureen Smith"
+      ]
     },
     {
-      "number": 4,
+      "number": "4",
       "label": "Table 4",
-      "guests": ["Name 31", "Name 32", "Name 33", "Name 34", "Name 35", "Name 36", "Name 37", "Name 38", "Name 39", "Name 40"]
+      "guests": [
+        "Brianna D'Adamo",
+        "Dan D'Adamo",
+        "David D'Adamo",
+        "Karen D'Adamo",
+        "Mary Anne D'Adamo",
+        "Neall D'Adamo",
+        "Raleigh D'Adamo",
+        "Ciara Hoffman",
+        "Salvatore Latella",
+        "Jenny McNulty"
+      ]
     },
     {
-      "number": 5,
+      "number": "5",
       "label": "Table 5",
-      "guests": ["Name 41", "Name 42", "Name 43", "Name 44", "Name 45", "Name 46", "Name 47", "Name 48", "Name 49", "Name 50"]
+      "guests": [
+        "Michelle Hueston",
+        "Ciera Lopez",
+        "Barbara Magaster",
+        "Mikael Magaster",
+        "Jacob Mania",
+        "Joseph Mania",
+        "Susan Mania",
+        "Nicole Trueb"
+      ]
     },
     {
-      "number": 6,
+      "number": "6",
       "label": "Table 6",
-      "guests": ["Name 51", "Name 52", "Name 53", "Name 54", "Name 55", "Name 56", "Name 57", "Name 58", "Name 59", "Name 60"]
+      "guests": [
+        "William Gartland",
+        "Walter Hamilton",
+        "Anne Malloy",
+        "Karen Pastore",
+        "Janice Prishwalko",
+        "Richard Singer",
+        "Barbara Wilson"
+      ]
     },
     {
-      "number": 7,
+      "number": "7",
       "label": "Table 7",
-      "guests": ["Name 61", "Name 62", "Name 63", "Name 64", "Name 65", "Name 66", "Name 67", "Name 68", "Name 69", "Name 70"]
+      "guests": [
+        "Stephanie Dunham",
+        "Samsara Durvasula",
+        "Liam Eastman",
+        "Conner Ganjavi",
+        "Nicole Geer",
+        "Brittany Kong",
+        "Nathan Kong",
+        "Chris Lu",
+        "Anika Mohindra",
+        "David Wu"
+      ]
     },
     {
-      "number": 8,
+      "number": "8",
       "label": "Table 8",
-      "guests": ["Name 71", "Name 72", "Name 73", "Name 74", "Name 75", "Name 76", "Name 77", "Name 78", "Name 79", "Name 80"]
+      "guests": [
+        "Kieran Anderson",
+        "Jacob Gideon",
+        "Nathanial Graham",
+        "Rafael Lippert & Guest",
+        "Alex Stillman",
+        "Andrew String",
+        "Rami Tellez",
+        "Steven Zarling",
+        "Jaron Zhou"
+      ]
     },
     {
-      "number": 9,
+      "number": "9",
       "label": "Table 9",
-      "guests": ["Name 81", "Name 82", "Name 83", "Name 84", "Name 85", "Name 86", "Name 87", "Name 88", "Name 89", "Name 90"]
+      "guests": [
+        "Joe Altenau",
+        "Christian Angelo",
+        "Nicholas Frias",
+        "Christian Garcia",
+        "Ben Hurbrough",
+        "Tyler Schuppert",
+        "Tanner Stitzer",
+        "Lane Sutton",
+        "Grace Taylor",
+        "Jack Weinkselbaum"
+      ]
     },
     {
-      "number": 10,
+      "number": "10",
       "label": "Table 10",
-      "guests": ["Name 91", "Name 92", "Name 93", "Name 94", "Name 95", "Name 96", "Name 97", "Name 98", "Name 99", "Name 100"]
+      "guests": [
+        "Holly Friend",
+        "Warren Friend",
+        "Earl Mix",
+        "Iris Mix",
+        "David Musto",
+        "Pauline Musto",
+        "Dolly Rech",
+        "Carolyn Woodberry",
+        "Sturgis Woodberry"
+      ]
     },
     {
-      "number": 11,
+      "number": "11",
       "label": "Table 11",
-      "guests": ["Name 101", "Name 102", "Name 103", "Name 104", "Name 105", "Name 106", "Name 107", "Name 108", "Name 109", "Name 110"]
+      "guests": [
+        "Chris Alvarado",
+        "Megan Alvarado",
+        "Benjamin Cape",
+        "Liming Cheng",
+        "Noah Faison",
+        "Caitlin Flohr",
+        "Allison Kuhn",
+        "Jon Simonett",
+        "Brianna Song"
+      ]
+    },
+    {
+      "number": "12",
+      "label": "Table 12",
+      "guests": [
+        "Scott Dyer",
+        "Taylor Frazier",
+        "Courtney Hammer",
+        "Tyler Hespe",
+        "Michael Rutter",
+        "Kit Sathong",
+        "Lexi Schwartz",
+        "Nicholas Turk"
+      ]
     }
   ]
 }
