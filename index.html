@@ -530,15 +530,20 @@
           if (score === 0 && q.length >= 4) {
             const words = name.split(/\s+/);
             for (const word of words) {
+              const maxDist = Math.floor(Math.min(q.length, word.length) / 3);
+              if (maxDist < 1) continue;
               const dist = levenshtein(q, word);
-              if (dist <= 2) {
+              if (dist <= maxDist) {
                 score = Math.max(score, 100 - dist * 30);
               }
             }
             // Also check against full name
-            const fullDist = levenshtein(q, name);
-            if (fullDist <= 3) {
-              score = Math.max(score, 80 - fullDist * 20);
+            const fullMaxDist = Math.floor(Math.min(q.length, name.length) / 3);
+            if (fullMaxDist >= 1) {
+              const fullDist = levenshtein(q, name);
+              if (fullDist <= fullMaxDist) {
+                score = Math.max(score, 80 - fullDist * 20);
+              }
             }
           }
 
