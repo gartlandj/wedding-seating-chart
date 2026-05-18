@@ -55,19 +55,13 @@
     }
 
     .monogram {
-      font-family: 'Cormorant Garamond', 'Georgia', serif;
-      font-size: 2.75rem;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      margin-bottom: 2rem;
-      line-height: 1;
-    }
-
-    .monogram .amp {
-      font-style: italic;
-      font-weight: 300;
-      font-size: 0.85em;
-      margin: 0 0.05em;
+      display: block;
+      width: 100%;
+      max-width: 256px;
+      aspect-ratio: 1680 / 660;
+      object-fit: cover;
+      object-position: top center;
+      margin: 0 auto 1.5rem;
     }
 
     .title {
@@ -350,7 +344,7 @@
       }
 
       .monogram {
-        font-size: 3.25rem;
+        max-width: 304px;
       }
 
       .title {
@@ -390,14 +384,9 @@
 
   <div class="frame">
     <header class="header">
-      <div class="monogram">J <span class="amp">&amp;</span> J</div>
+      <img class="monogram" src="monogram.png" alt="J &amp; J">
       <h1 class="title">Find Your Seat</h1>
       <div class="divider"></div>
-      <p class="event-details">
-        Saturday, the thirteenth of June<br>
-        two thousand twenty-six<br>
-        Stamford Yacht Club
-      </p>
     </header>
 
     <main>
