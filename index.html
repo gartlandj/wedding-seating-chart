@@ -224,6 +224,20 @@
 
     .room-wrap { display: block; }
 
+    .rooms-container {
+      border: 1px solid var(--navy-mid);
+      padding: 0.75rem 0 0;
+    }
+
+    .rooms-container > .room-wrap {
+      padding-bottom: 0.75rem;
+    }
+
+    .rooms-container > .room-wrap + .room-wrap {
+      border-top: 1.5px dotted var(--navy-mid);
+      padding-top: 0.75rem;
+    }
+
     .room-label {
       display: block;
       text-align: center;
@@ -239,7 +253,6 @@
     .room {
       position: relative;
       width: 100%;
-      border: 1px solid var(--navy-mid);
     }
 
     .room--dining { aspect-ratio: 5 / 3.7; }
@@ -634,7 +647,7 @@
         const grid = document.getElementById('table-map-grid');
         const byId = new Map(tables.map(t => [String(t.number), t]));
 
-        grid.innerHTML = ROOM_LAYOUT.map(room => {
+        const roomsHtml = ROOM_LAYOUT.map(room => {
           const circles = room.tables.map(pos => {
             const t = byId.get(pos.id);
             if (!t) return '';
@@ -648,6 +661,8 @@
             <div class="room ${room.cls}">${circles}</div>
           </div>`;
         }).join('');
+
+        grid.innerHTML = `<div class="rooms-container">${roomsHtml}</div>`;
 
         // Click to show table detail
         grid.addEventListener('click', (e) => {
