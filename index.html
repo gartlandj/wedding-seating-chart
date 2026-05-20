@@ -238,8 +238,20 @@
     }
 
     .rooms-container > .room-wrap + .room-wrap {
-      border-top: 1.5px dotted var(--navy-mid);
+      position: relative;
       padding-top: 0.75rem;
+    }
+
+    .rooms-container > .room-wrap + .room-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-image: radial-gradient(circle, var(--navy-mid) 1px, transparent 1.2px);
+      background-size: 9px 2px;
+      background-repeat: repeat-x;
     }
 
     .room-label {
